@@ -562,6 +562,7 @@ AsyncClient::AsyncClient(tcp_pcb* pcb)
 , _rx_since_timeout(0)
 , _ack_timeout(ASYNC_MAX_ACK_TIME)
 , _connect_port(0)
+, _recv_pbuf_flags(0)
 , prev(NULL)
 , next(NULL)
 {
@@ -931,6 +932,8 @@ int8_t AsyncClient::_recv(tcp_pcb* pcb, pbuf* pb, int8_t err) {
             _pb_cb(_pb_cb_arg, this, b);
         } else {
             if(_recv_cb) {
+//              pmb
+                _recv_pbuf_flags = b->flags;
                 _recv_cb(_recv_cb_arg, this, b->payload, b->len);
             }
             if(!_ack_pcb) {
