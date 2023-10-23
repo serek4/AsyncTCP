@@ -45,7 +45,7 @@ extern "C" {
 #define CONFIG_ASYNC_TCP_TASK_PRIORITY 3
 #endif
 #ifndef CONFIG_ASYNC_TCP_QUEUE_SIZE
-#define CONFIG_ASYNC_TCP_QUEUE_SIZE 32
+#define CONFIG_ASYNC_TCP_QUEUE_SIZE 128
 #endif
 
 class AsyncClient;
