@@ -122,6 +122,7 @@ class AsyncClient {
     void ackPacket(struct pbuf * pb);//ack pbuf from onPacket
     size_t ack(size_t len); //ack data that you have not acked using the method below
     void ackLater(){ _ack_pcb = false; } //will not ack the current packet. Call from onData
+    bool isRecvPush(){ return !!(_recv_pbuf_flags & PBUF_FLAG_PUSH); }
 
     const char * errorToString(int8_t error);
     const char * stateToString();
@@ -168,6 +169,7 @@ class AsyncClient {
     uint32_t _rx_since_timeout;
     uint32_t _ack_timeout;
     uint16_t _connect_port;
+    u8_t _recv_pbuf_flags;
 
     int8_t _close();
     void _free_closed_slot();
